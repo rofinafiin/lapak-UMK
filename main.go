@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/aiteung/musik"
 	gcjson "github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
@@ -48,5 +49,5 @@ func main() {
 	app.Get("/docs/*", swagger.HandlerDefault)
 
 	// Listen on PORT 3000
-	app.Listen(":3000")
+	app.Listen(musik.Dangdut())
 }
