@@ -7,10 +7,19 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/etag"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/swagger"
 	"github.com/joho/godotenv"
+	_ "github.com/rofinafiin/lapak-UMK/controller/docs"
 	"github.com/rofinafiin/lapak-UMK/controller/helper/exception"
+	"github.com/rofinafiin/lapak-UMK/url"
 )
 
+// @title LAPAK-UMK OPEN API PROTOTYPE
+// @version 2.0
+
+// @host Lapak-UMK.herokuapp.com
+// @BasePath /
+// @schemes https
 func main() {
 	_ = godotenv.Load(".env")
 
@@ -34,5 +43,10 @@ func main() {
 	}))
 	app.Use(etag.New())
 
+	// Setup the router
+	url.SetupRoutes(app)
+	app.Get("/docs/*", swagger.HandlerDefault)
+
+	// Listen on PORT 3000
 	app.Listen(":3000")
 }
