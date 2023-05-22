@@ -31,7 +31,7 @@ func GetPenjualanByNamaProduk(namaproduk string, db *mongo.Database) (data model
 	filter := bson.M{"NamaProduk": namaproduk}
 	err = user.FindOne(context.TODO(), filter).Decode(&data)
 	if err != nil {
-		fmt.Printf("GetDataCompFromStatus: %v\n", err)
+		fmt.Printf("GetDataPenjualanFormNamaProduk: %v\n", err)
 	}
 	return data, err
 }
@@ -48,7 +48,7 @@ func GetPengeluaranByNama(nama string, db *mongo.Database) (data model.Pengeluar
 	filter := bson.M{"Nama": nama}
 	err = user.FindOne(context.TODO(), filter).Decode(&data)
 	if err != nil {
-		fmt.Printf("GetDataCompFromStatus: %v\n", err)
+		fmt.Printf("GetDataPengeluaranFormNama: %v\n", err)
 	}
 	return data, err
 }
