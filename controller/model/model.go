@@ -1,7 +1,5 @@
 package model
 
-import "time"
-
 type ReturnData struct {
 	Code    int         `json:"code"`
 	Success bool        `json:"success"`
@@ -9,10 +7,10 @@ type ReturnData struct {
 	Data    interface{} `json:"data"`
 }
 type Penjualan struct {
-	ID               string    `json:"id" bson:"id"`
-	NamaProduk       string    `json:"namaproduk" bson:"namaproduk"`
-	JumlahPenjualan  string    `json:"jumlahpenjualan" bson:"jumlahpenjualan"`
-	TanggalDataMasuk time.Time `json:"tanggaldatamasuk" bson:"tanggaldatamasuk"`
+	ID               int    `json:"id" bson:"id"`
+	NamaProduk       string `json:"namaproduk" bson:"namaproduk"`
+	JumlahPenjualan  int    `json:"jumlahpenjualan" bson:"jumlahpenjualan"`
+	TanggalDataMasuk string `json:"tanggaldatamasuk" bson:"tanggaldatamasuk"`
 }
 type Recap struct {
 	ID             string `json:"id" bson:"id"`
@@ -28,8 +26,8 @@ type User struct {
 	Password string `json:"password" bson:"password"`
 }
 type Pengeluaran struct {
-	ID              string    `json:"ID" bson:"ID"`
-	Namapengeluaran string    `json:"namapengeluaran" bson:"namapengeluaran"`
-	Jumlah          int       `json:"jumlah" bson:"jumlah"`
-	Tanggal         time.Time `json:"tanggal" bson:"tanggal"`
+	ID              int    `json:"ID" bson:"ID"`
+	Namapengeluaran string `json:"namapengeluaran" bson:"namapengeluaran"`
+	Jumlah          int    `json:"jumlah" bson:"jumlah"`
+	Tanggal         string `json:"tanggal" bson:"tanggal"`
 }

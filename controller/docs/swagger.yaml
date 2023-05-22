@@ -1,9 +1,18 @@
-basePath: /
 definitions:
+  main.ReturnData:
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+      success:
+        type: boolean
+    type: object
   model.Pengeluaran:
     properties:
       ID:
-        type: string
+        type: integer
       jumlah:
         type: integer
       namapengeluaran:
@@ -14,20 +23,41 @@ definitions:
   model.Penjualan:
     properties:
       id:
-        type: string
+        type: integer
       jumlahpenjualan:
-        type: string
+        type: integer
       namaproduk:
         type: string
       tanggaldatamasuk:
         type: string
     type: object
-host: Lapak-UMK.herokuapp.com
 info:
   contact: {}
   title: LAPAK-UMK OPEN API PROTOTYPE
   version: "2.0"
 paths:
+  /lapumk/inspengeluaran:
+    post:
+      consumes:
+      - application/json
+      description: get data Pengeluaran.
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.Pengeluaran'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Pengeluaran'
+      summary: insert data Pengeluaran.
+      tags:
+      - Lapak-UMKM
   /lapumk/inspenjualan:
     post:
       consumes:
@@ -50,15 +80,15 @@ paths:
       summary: insert data penjualan.
       tags:
       - Lapak-UMKM
-  /lapumk/pengeluaran/{namaproduk}:
+  /lapumk/pengeluaran/{namapengeluaran}:
     get:
       consumes:
       - application/json
       description: get data pengeluaran.
       parameters:
-      - description: Masukan namaproduk
+      - description: Masukan namapengeluaran
         in: path
-        name: namaproduk
+        name: namapengeluaran
         required: true
         type: string
       produces:
@@ -71,15 +101,15 @@ paths:
       summary: Mengambil data Pengeluaran (single).
       tags:
       - Lapak-UMKM
-  /lapumk/penjualan/{namapenjualan}:
+  /lapumk/penjualan/{NamaProduk}:
     get:
       consumes:
       - application/json
       description: get data Penjualan.
       parameters:
-      - description: Masukan namapenjualan
+      - description: Masukan namaproduk
         in: path
-        name: namapenjualan
+        name: NamaProduk
         required: true
         type: string
       produces:
@@ -92,6 +122,4 @@ paths:
       summary: Mengambil data Penjualan (single).
       tags:
       - Lapak-UMKM
-schemes:
-- https
 swagger: "2.0"

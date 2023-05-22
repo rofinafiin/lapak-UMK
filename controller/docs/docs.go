@@ -16,6 +16,40 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/lapumk/inspengeluaran": {
+            "post": {
+                "description": "get data Pengeluaran.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lapak-UMKM"
+                ],
+                "summary": "insert data Pengeluaran.",
+                "parameters": [
+                    {
+                        "description": "Payload Body [RAW]",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Pengeluaran"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Pengeluaran"
+                        }
+                    }
+                }
+            }
+        },
         "/lapumk/inspenjualan": {
             "post": {
                 "description": "get data penjualan.",
@@ -50,7 +84,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/lapumk/pengeluaran/{namaproduk}": {
+        "/lapumk/pengeluaran/{namapengeluaran}": {
             "get": {
                 "description": "get data pengeluaran.",
                 "consumes": [
@@ -66,8 +100,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Masukan namaproduk",
-                        "name": "namaproduk",
+                        "description": "Masukan namapengeluaran",
+                        "name": "namapengeluaran",
                         "in": "path",
                         "required": true
                     }
@@ -82,7 +116,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/lapumk/penjualan/{namapenjualan}": {
+        "/lapumk/penjualan/{NamaProduk}": {
             "get": {
                 "description": "get data Penjualan.",
                 "consumes": [
@@ -98,8 +132,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Masukan namapenjualan",
-                        "name": "namapenjualan",
+                        "description": "Masukan namaproduk",
+                        "name": "NamaProduk",
                         "in": "path",
                         "required": true
                     }
@@ -116,11 +150,26 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "main.ReturnData": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "status": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
         "model.Pengeluaran": {
             "type": "object",
             "properties": {
                 "ID": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "jumlah": {
                     "type": "integer"
@@ -137,10 +186,10 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "jumlahpenjualan": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "namaproduk": {
                     "type": "string"
@@ -156,9 +205,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "2.0",
-	Host:             "Lapak-UMK.herokuapp.com",
-	BasePath:         "/",
-	Schemes:          []string{"https"},
+	Host:             "",
+	BasePath:         "",
+	Schemes:          []string{},
 	Title:            "LAPAK-UMK OPEN API PROTOTYPE",
 	Description:      "",
 	InfoInstanceName: "swagger",

@@ -1,16 +1,45 @@
 {
-    "schemes": [
-        "https"
-    ],
     "swagger": "2.0",
     "info": {
         "title": "LAPAK-UMK OPEN API PROTOTYPE",
         "contact": {},
         "version": "2.0"
     },
-    "host": "Lapak-UMK.herokuapp.com",
-    "basePath": "/",
     "paths": {
+        "/lapumk/inspengeluaran": {
+            "post": {
+                "description": "get data Pengeluaran.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lapak-UMKM"
+                ],
+                "summary": "insert data Pengeluaran.",
+                "parameters": [
+                    {
+                        "description": "Payload Body [RAW]",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Pengeluaran"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Pengeluaran"
+                        }
+                    }
+                }
+            }
+        },
         "/lapumk/inspenjualan": {
             "post": {
                 "description": "get data penjualan.",
@@ -45,7 +74,7 @@
                 }
             }
         },
-        "/lapumk/pengeluaran/{namaproduk}": {
+        "/lapumk/pengeluaran/{namapengeluaran}": {
             "get": {
                 "description": "get data pengeluaran.",
                 "consumes": [
@@ -61,8 +90,8 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Masukan namaproduk",
-                        "name": "namaproduk",
+                        "description": "Masukan namapengeluaran",
+                        "name": "namapengeluaran",
                         "in": "path",
                         "required": true
                     }
@@ -77,7 +106,7 @@
                 }
             }
         },
-        "/lapumk/penjualan/{namapenjualan}": {
+        "/lapumk/penjualan/{NamaProduk}": {
             "get": {
                 "description": "get data Penjualan.",
                 "consumes": [
@@ -93,8 +122,8 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Masukan namapenjualan",
-                        "name": "namapenjualan",
+                        "description": "Masukan namaproduk",
+                        "name": "NamaProduk",
                         "in": "path",
                         "required": true
                     }
@@ -111,11 +140,26 @@
         }
     },
     "definitions": {
+        "main.ReturnData": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "status": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
         "model.Pengeluaran": {
             "type": "object",
             "properties": {
                 "ID": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "jumlah": {
                     "type": "integer"
@@ -132,10 +176,10 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "jumlahpenjualan": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "namaproduk": {
                     "type": "string"

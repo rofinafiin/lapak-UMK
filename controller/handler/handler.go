@@ -19,12 +19,12 @@ type UMKHandler struct {
 // @Tags Lapak-UMKM
 // @Accept application/json
 // @Produce json
-// @Param namaproduk path string true "Masukan namaproduk"
+// @Param namapengeluaran path string true "Masukan namapengeluaran"
 // @Success 200 {object} model.Pengeluaran{}
-// @Router /lapumk/pengeluaran/{namaproduk} [get]
+// @Router /lapumk/pengeluaran/{namapengeluaran} [get]
 func (db *UMKHandler) GetDataPengeluaran(c *fiber.Ctx) (err error) {
-	namaproduk := c.Params("namaproduk")
-	getdata, err := repository.GetPenjualanByNamaProduk(namaproduk, config.DBMongo("lapak-UMK"))
+	namapenjualan := c.Params("namapengeluaran")
+	getdata, err := repository.GetPengeluaranByNama(namapenjualan, config.DBMongo("lapak-UMK"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusNotFound, "Data Tidak ada")
 	}
@@ -42,12 +42,12 @@ func (db *UMKHandler) GetDataPengeluaran(c *fiber.Ctx) (err error) {
 // @Tags Lapak-UMKM
 // @Accept application/json
 // @Produce json
-// @Param namapenjualan path string true "Masukan namapenjualan"
+// @Param NamaProduk path string true "Masukan namaproduk"
 // @Success 200 {object} model.Penjualan{}
-// @Router /lapumk/penjualan/{namapenjualan} [get]
+// @Router /lapumk/penjualan/{NamaProduk} [get]
 func (db *UMKHandler) GetDataPenjualan(c *fiber.Ctx) (err error) {
-	namapenjualan := c.Params("namapenjualan")
-	getdata, err := repository.GetPenjualanByNamaProduk(namapenjualan, config.DBMongo("lapak-UMK"))
+	namaproduk := c.Params("NamaProduk")
+	getdata, err := repository.GetPenjualanByNamaProduk(namaproduk, config.DBMongo("lapak-UMK"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusNotFound, "Data tidak Ditemukan")
 	}
@@ -89,4 +89,45 @@ func (db *UMKHandler) InsertDataPenjualan(c *fiber.Ctx) (err error) {
 		Status:  "Data Berhasil Disimpan",
 		Data:    Inserted,
 	}.WriteToBody(c)
+}
+
+// InsPengeluaran godoc
+// @Summary insert data Pengeluaran.
+// @Description get data Pengeluaran.
+// @Tags Lapak-UMKM
+// @Accept application/json
+// @Param request body model.Pengeluaran true "Payload Body [RAW]"
+// @Produce json
+// @Success 200 {object} model.Pengeluaran
+// @Router /lapumk/inspengeluaran [post]
+func (db *UMKHandler) InsPengeluaran(c *fiber.Ctx) (err error) {
+	database := config.DBMongo("lapak-UMK")
+	var pengeluaran model.Pengeluaran
+	if err := c.BodyParser(&pengeluaran); err != nil {
+		return err
+	}
+	Inserted, err := repository.InsertPengeluaran(database,
+		pengeluaran.ID,
+		pengeluaran.Namapengeluaran,
+		pengeluaran.Jumlah,
+		pengeluaran.Tanggal,
+	)
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest)
+	}
+	return json.ReturnData{
+		Code:    200,
+		Success: true,
+		Status:  "Data Berhasil Disimpan",
+		Data:    Inserted,
+	}.WriteToBody(c)
+}
+
+func (db *UMKHandler) GetPengeluaran(c *fiber.Ctx) error {
+	thn := c.Params("namapengeluaran")
+	crot, err := repository.GetPengeluaranByNama(thn, config.DBMongo("lapak-UMK"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusNotFound, "Data gaada")
+	}
+	return c.JSON(crot)
 }
