@@ -26,9 +26,9 @@ func InsertPenjualan(db *mongo.Database, id string, namaproduk string, jumlahpen
 	return InsertOneDoc(db, "laporankeungan", m), err
 }
 
-func GetPenjualanByNamaProduk(nama string, db *mongo.Database) (data model.Penjualan, err error) {
+func GetPenjualanByNamaProduk(namaproduk string, db *mongo.Database) (data model.Penjualan, err error) {
 	user := db.Collection("laporankeungan")
-	filter := bson.M{"NamaProduk": nama}
+	filter := bson.M{"NamaProduk": namaproduk}
 	err = user.FindOne(context.TODO(), filter).Decode(&data)
 	if err != nil {
 		fmt.Printf("GetDataCompFromStatus: %v\n", err)
