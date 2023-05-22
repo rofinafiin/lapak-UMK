@@ -1,0 +1,97 @@
+basePath: /
+definitions:
+  model.Pengeluaran:
+    properties:
+      ID:
+        type: string
+      jumlah:
+        type: integer
+      namapengeluaran:
+        type: string
+      tanggal:
+        type: string
+    type: object
+  model.Penjualan:
+    properties:
+      id:
+        type: string
+      jumlahpenjualan:
+        type: string
+      namaproduk:
+        type: string
+      tanggaldatamasuk:
+        type: string
+    type: object
+host: Lapak-UMK.herokuapp.com
+info:
+  contact: {}
+  title: LAPAK-UMK OPEN API PROTOTYPE
+  version: "2.0"
+paths:
+  /lapumk/inspenjualan:
+    post:
+      consumes:
+      - application/json
+      description: get data penjualan.
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.Penjualan'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Penjualan'
+      summary: insert data penjualan.
+      tags:
+      - Lapak-UMKM
+  /lapumk/pengeluaran/{namaproduk}:
+    get:
+      consumes:
+      - application/json
+      description: get data pengeluaran.
+      parameters:
+      - description: Masukan namaproduk
+        in: path
+        name: namaproduk
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Pengeluaran'
+      summary: Mengambil data Pengeluaran (single).
+      tags:
+      - Lapak-UMKM
+  /lapumk/penjualan/{namapenjualan}:
+    get:
+      consumes:
+      - application/json
+      description: get data Penjualan.
+      parameters:
+      - description: Masukan namapenjualan
+        in: path
+        name: namapenjualan
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Penjualan'
+      summary: Mengambil data Penjualan (single).
+      tags:
+      - Lapak-UMKM
+schemes:
+- https
+swagger: "2.0"

@@ -21,7 +21,7 @@ import (
 // @BasePath /
 // @schemes https
 func main() {
-	_ = godotenv.Load(".env")
+	_ = godotenv.Load("prod.env")
 
 	// Start a new fiber app
 	app := fiber.New(fiber.Config{

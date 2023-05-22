@@ -28,8 +28,8 @@ type User struct {
 	Password string `json:"password" bson:"password"`
 }
 type Pengeluaran struct {
-	ID      string    `json:"ID" bson:"ID"`
-	Nama    string    `json:"nama" bson:"nama"`
-	Jumlah  int       `json:"jumlah" bson:"jumlah"`
-	Tanggal time.Time `json:"tanggal" bson:"tanggal"`
+	ID              string    `json:"ID" bson:"ID"`
+	Namapengeluaran string    `json:"namapengeluaran" bson:"namapengeluaran"`
+	Jumlah          int       `json:"jumlah" bson:"jumlah"`
+	Tanggal         time.Time `json:"tanggal" bson:"tanggal"`
 }

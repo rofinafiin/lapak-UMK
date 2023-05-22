@@ -38,7 +38,7 @@ func GetPenjualanByNamaProduk(namaproduk string, db *mongo.Database) (data model
 func InsertPengeluaran(db *mongo.Database, id string, nama string, jumlah int, tanggal time.Time) (InsertedID interface{}, err error) {
 	var m model.Pengeluaran
 	m.ID = id
-	m.Nama = nama
+	m.Namapengeluaran = nama
 	m.Jumlah = jumlah
 	m.Tanggal = tanggal
 	return InsertOneDoc(db, "laporankeungan", m), err
