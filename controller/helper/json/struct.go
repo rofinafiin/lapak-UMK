@@ -9,18 +9,18 @@ type ReturnData struct {
 	Data    interface{} `json:"data"`
 }
 type Penjualan struct {
-	ID               string    `json:"ID" bson:"ID"`
-	NamaProduk       string    `json:"NamaProduk" bson:"NamaProduk"`
-	JumlahPenjualan  string    `json:"JumlahPenjualan" bson:"JumlahPenjualan"`
-	TanggalDataMasuk time.Time `json:"TanggalDataMasuk" bson:"TanggalDataMasuk"`
+	ID               string    `json:"id" bson:"id"`
+	NamaProduk       string    `json:"namaproduk" bson:"namaproduk"`
+	JumlahPenjualan  string    `json:"jumlahpenjualan" bson:"jumlahpenjualan"`
+	TanggalDataMasuk time.Time `json:"tanggaldatamasuk" bson:"tanggaldatamasuk"`
 }
 type Recap struct {
-	ID             string `json:"ID" bson:"ID"`
-	NamaPenjualan  string `json:"NamaPenjualan" bson:"NamaPenjualan"`
-	RekapPenjualan string `json:"RekapPenjualan" bson:"RekapPenjualan"`
-	JumlahKotor    int    `json:"JumlahKotor" bson:"JumlahKotor"`
-	Pengeluaran    int    `json:"Pengeluaran" bson:"Pengeluaran"`
-	JumlahBersih   int    `json:"JumlahBersih" bson:"JumlahBersih"`
+	ID             string `json:"id" bson:"id"`
+	NamaPenjualan  string `json:"namapenjualan" bson:"namapenjualan"`
+	RekapPenjualan string `json:"rekappenjualan" bson:"rekappenjualan"`
+	JumlahKotor    int    `json:"jumlahkotor" bson:"jumlahkotor"`
+	Pengeluaran    int    `json:"pengeluaran" bson:"pengeluaran"`
+	JumlahBersih   int    `json:"jumlahbersih" bson:"jumlahbersih"`
 }
 type User struct {
 	ID       int    `json:"id" bson:"id"`
@@ -29,7 +29,7 @@ type User struct {
 }
 type Pengeluaran struct {
 	ID      string    `json:"ID" bson:"ID"`
-	Nama    string    `json:"Nama" bson:"Nama"`
-	Jumlah  int       `json:"Jumlah" bson:"Jumlah"`
-	Tanggal time.Time `json:"Tanggal" bson:"Tanggal"`
+	Nama    string    `json:"nama" bson:"nama"`
+	Jumlah  int       `json:"jumlah" bson:"jumlah"`
+	Tanggal time.Time `json:"tanggal" bson:"tanggal"`
 }
