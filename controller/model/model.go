@@ -14,7 +14,7 @@ type Penjualan struct {
 	Cabang           string `json:"cabang" bson:"cabang"`
 }
 type Recap struct {
-	ID             string `json:"id" bson:"id"`
+	ID             int    `json:"id" bson:"id"`
 	NamaPenjualan  string `json:"namapenjualan" bson:"namapenjualan"`
 	RekapPenjualan string `json:"rekappenjualan" bson:"rekappenjualan"`
 	JumlahKotor    int    `json:"jumlahkotor" bson:"jumlahkotor"`
@@ -27,7 +27,7 @@ type User struct {
 	Password string `json:"password" bson:"password"`
 }
 type Pengeluaran struct {
-	ID              int    `json:"ID" bson:"ID"`
+	ID              int    `json:"id" bson:"id"`
 	Namapengeluaran string `json:"namapengeluaran" bson:"namapengeluaran"`
 	Jumlah          int    `json:"jumlah" bson:"jumlah"`
 	Tanggal         string `json:"tanggal" bson:"tanggal"`
