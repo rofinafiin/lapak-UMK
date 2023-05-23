@@ -79,6 +79,7 @@ func (db *UMKHandler) InsertDataPenjualan(c *fiber.Ctx) (err error) {
 		penjualan.NamaProduk,
 		penjualan.JumlahPenjualan,
 		penjualan.TanggalDataMasuk,
+		penjualan.Cabang,
 	)
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest)
@@ -111,6 +112,7 @@ func (db *UMKHandler) InsPengeluaran(c *fiber.Ctx) (err error) {
 		pengeluaran.Namapengeluaran,
 		pengeluaran.Jumlah,
 		pengeluaran.Tanggal,
+		pengeluaran.Cabang,
 	)
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest)
@@ -123,11 +125,11 @@ func (db *UMKHandler) InsPengeluaran(c *fiber.Ctx) (err error) {
 	}.WriteToBody(c)
 }
 
-func (db *UMKHandler) GetPengeluaran(c *fiber.Ctx) error {
-	thn := c.Params("namapengeluaran")
-	crot, err := repository.GetPengeluaranByNama(thn, config.DBMongo("lapak-UMK"))
-	if err != nil {
-		return fiber.NewError(fiber.StatusNotFound, "Data gaada")
-	}
-	return c.JSON(crot)
+func (db *UMKHandler) KalkulasiLaporan(c *fiber.Ctx) (err error) {
+	return err
+}
+
+func (db *UMKHandler) GetAllPengeluaran(c *fiber.Ctx) (err error) {
+
+	return err
 }

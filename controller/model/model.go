@@ -11,6 +11,7 @@ type Penjualan struct {
 	NamaProduk       string `json:"namaproduk" bson:"namaproduk"`
 	JumlahPenjualan  int    `json:"jumlahpenjualan" bson:"jumlahpenjualan"`
 	TanggalDataMasuk string `json:"tanggaldatamasuk" bson:"tanggaldatamasuk"`
+	Cabang           string `json:"cabang" bson:"cabang"`
 }
 type Recap struct {
 	ID             string `json:"id" bson:"id"`
@@ -30,4 +31,5 @@ type Pengeluaran struct {
 	Namapengeluaran string `json:"namapengeluaran" bson:"namapengeluaran"`
 	Jumlah          int    `json:"jumlah" bson:"jumlah"`
 	Tanggal         string `json:"tanggal" bson:"tanggal"`
+	Cabang          string `json:"cabang" bson:"cabang"`
 }

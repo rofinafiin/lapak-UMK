@@ -171,6 +171,9 @@ const docTemplate = `{
                 "ID": {
                     "type": "integer"
                 },
+                "cabang": {
+                    "type": "string"
+                },
                 "jumlah": {
                     "type": "integer"
                 },
@@ -185,6 +188,9 @@ const docTemplate = `{
         "model.Penjualan": {
             "type": "object",
             "properties": {
+                "cabang": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },

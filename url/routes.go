@@ -16,6 +16,6 @@ func SetuplapRoutes(router fiber.Router) {
 	router.Get("/pengeluaran/:namapengeluaran", UMK.GetDataPengeluaran)
 	router.Post("/inspenjualan", UMK.InsertDataPenjualan)
 	router.Post("/inspengeluaran", UMK.InsPengeluaran)
-	router.Get("/peng/:namapengeluaran", UMK.GetPengeluaran)
+	//router.Get("/peng/:namapengeluaran", UMK.GetPengeluaran)
 
 }

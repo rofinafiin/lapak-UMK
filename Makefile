@@ -4,4 +4,6 @@ run:
 swager:
 	swag init -g main.go --output controller/docs
 
+all: swager run
+
 

@@ -161,6 +161,9 @@
                 "ID": {
                     "type": "integer"
                 },
+                "cabang": {
+                    "type": "string"
+                },
                 "jumlah": {
                     "type": "integer"
                 },
@@ -175,6 +178,9 @@
         "model.Penjualan": {
             "type": "object",
             "properties": {
+                "cabang": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },

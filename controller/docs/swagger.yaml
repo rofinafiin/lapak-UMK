@@ -13,6 +13,8 @@ definitions:
     properties:
       ID:
         type: integer
+      cabang:
+        type: string
       jumlah:
         type: integer
       namapengeluaran:
@@ -22,6 +24,8 @@ definitions:
     type: object
   model.Penjualan:
     properties:
+      cabang:
+        type: string
       id:
         type: integer
       jumlahpenjualan:
