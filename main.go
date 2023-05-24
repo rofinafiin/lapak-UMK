@@ -56,7 +56,7 @@ func main() {
 
 	// Setup the router
 	url.SetupRoutes(app)
-	app.Get("/doc/*", swagger.HandlerDefault)
+	app.Get("/docs/*", swagger.HandlerDefault)
 
 	// Listen on PORT 3000
 	app.Listen(musik.Dangdut())
