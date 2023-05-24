@@ -175,7 +175,7 @@ func (db *UMKHandler) KalkulasiLaporan(c *fiber.Ctx) (err error) {
 	return json.ReturnData{
 		Code:    200,
 		Success: true,
-		Status:  "Data Rekap Berhasil Disimpan",
+		Status:  "Data Rekap Berhasil Disimpan!",
 		Data:    data,
 	}.WriteToBody(c)
 }
