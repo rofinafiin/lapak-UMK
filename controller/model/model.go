@@ -31,3 +31,10 @@ type Pengeluaran struct {
 	Tanggal         string `json:"tanggal" bson:"tanggal"`
 	Cabang          string `json:"cabang" bson:"cabang"`
 }
+
+type RecapResponse struct {
+	Penjualan    []Penjualan   `json:"penjualan" bson:"penjualan"`
+	Pengeluaran  []Pengeluaran `json:"pengeluaran" bson:"pengeluaran"`
+	JumlahKotor  string        `json:"jumlahkotor" bson:"jumlahkotor"`
+	JumlahBersih string        `json:"jumlahbersih" bson:"jumlahbersih"`
+}

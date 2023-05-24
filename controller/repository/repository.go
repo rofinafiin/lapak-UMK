@@ -3,9 +3,11 @@ package repository
 import (
 	"context"
 	"fmt"
+	acc "github.com/leekchan/accounting"
 	"github.com/rofinafiin/lapak-UMK/controller/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"math/big"
 )
 
 func InsertOneDoc(db *mongo.Database, collection string, doc interface{}) (insertedID interface{}) {
@@ -88,4 +90,15 @@ func InsertRekap(db *mongo.Database, Pengeluaran []model.Pengeluaran, penjualan 
 	m.JumlahBersih = jumlahbersih
 	m.JumlahKotor = jumlahkotor
 	return InsertOneDoc(db, "rekap", m), err
+}
+
+func FormatRupiah(amount float64) string {
+	lc := acc.LocaleInfo["IDR"]
+	ac := acc.Accounting{
+		Symbol:    lc.ComSymbol,
+		Precision: 2,
+		Thousand:  lc.ThouSep,
+		Decimal:   lc.DecSep,
+	}
+	return ac.FormatMoneyBigFloat(big.NewFloat(amount))
 }

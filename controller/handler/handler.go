@@ -151,20 +151,32 @@ func (db *UMKHandler) KalkulasiLaporan(c *fiber.Ctx) (err error) {
 	for z, _ := range getdatapengeluaran {
 		jmlpengeluaran += getdatapengeluaran[z].Jumlah
 	}
-	jumlahakhir := jmlpenjualan - jmlpengeluaran
+	jumlahpenjualan := float64(jmlpenjualan)
+	//jumlahpengeluaran := float64(jmlpengeluaran)
+	jumlahakhir := float64(jmlpenjualan - jmlpengeluaran)
 
-	Inserted, err := repository.InsertRekap(config.DBMongo("lapak-UMK"),
+	jmlakhirrupiah := repository.FormatRupiah(jumlahakhir)
+	jmlpenjualanrup := repository.FormatRupiah(jumlahpenjualan)
+
+	data := model.RecapResponse{
+		Penjualan:    getdatapenjualan,
+		Pengeluaran:  getdatapengeluaran,
+		JumlahKotor:  jmlpenjualanrup,
+		JumlahBersih: jmlakhirrupiah,
+	}
+
+	_, err = repository.InsertRekap(config.DBMongo("lapak-UMK"),
 		getdatapengeluaran,
 		getdatapenjualan,
 		jmlpenjualan,
-		jumlahakhir,
+		int(jumlahakhir),
 	)
 
 	return json.ReturnData{
 		Code:    200,
 		Success: true,
 		Status:  "Data Rekap Berhasil Disimpan",
-		Data:    Inserted,
+		Data:    data,
 	}.WriteToBody(c)
 }
 
