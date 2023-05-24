@@ -33,8 +33,9 @@ type Pengeluaran struct {
 }
 
 type RecapResponse struct {
-	Penjualan    []Penjualan   `json:"penjualan" bson:"penjualan"`
-	Pengeluaran  []Pengeluaran `json:"pengeluaran" bson:"pengeluaran"`
-	JumlahKotor  string        `json:"jumlahkotor" bson:"jumlahkotor"`
-	JumlahBersih string        `json:"jumlahbersih" bson:"jumlahbersih"`
+	Penjualan         []Penjualan   `json:"penjualan" bson:"penjualan"`
+	Pengeluaran       []Pengeluaran `json:"pengeluaran" bson:"pengeluaran"`
+	JumlahKotor       string        `json:"jumlahkotor" bson:"jumlahkotor"`
+	JumlahPengeluaran string        `json:"jumlahPengeluaran" bson:"jumlahPengeluaran"`
+	JumlahBersih      string        `json:"jumlahbersih" bson:"jumlahbersih"`
 }

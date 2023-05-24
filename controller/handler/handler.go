@@ -152,17 +152,19 @@ func (db *UMKHandler) KalkulasiLaporan(c *fiber.Ctx) (err error) {
 		jmlpengeluaran += getdatapengeluaran[z].Jumlah
 	}
 	jumlahpenjualan := float64(jmlpenjualan)
-	//jumlahpengeluaran := float64(jmlpengeluaran)
+	jumlahpengeluaran := float64(jmlpengeluaran)
 	jumlahakhir := float64(jmlpenjualan - jmlpengeluaran)
 
+	jmlpengeluaranrup := repository.FormatRupiah(jumlahpengeluaran)
 	jmlakhirrupiah := repository.FormatRupiah(jumlahakhir)
 	jmlpenjualanrup := repository.FormatRupiah(jumlahpenjualan)
 
 	data := model.RecapResponse{
-		Penjualan:    getdatapenjualan,
-		Pengeluaran:  getdatapengeluaran,
-		JumlahKotor:  jmlpenjualanrup,
-		JumlahBersih: jmlakhirrupiah,
+		Penjualan:         getdatapenjualan,
+		Pengeluaran:       getdatapengeluaran,
+		JumlahKotor:       jmlpenjualanrup,
+		JumlahPengeluaran: jmlpengeluaranrup,
+		JumlahBersih:      jmlakhirrupiah,
 	}
 
 	_, err = repository.InsertRekap(config.DBMongo("lapak-UMK"),
