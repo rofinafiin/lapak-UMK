@@ -11,10 +11,10 @@ definitions:
     type: object
   model.Pengeluaran:
     properties:
-      ID:
-        type: integer
       cabang:
         type: string
+      id:
+        type: integer
       jumlah:
         type: integer
       namapengeluaran:
@@ -35,11 +35,71 @@ definitions:
       tanggaldatamasuk:
         type: string
     type: object
+  model.Recap:
+    properties:
+      jumlahbersih:
+        type: integer
+      jumlahkotor:
+        type: integer
+      pengeluaran:
+        items:
+          $ref: '#/definitions/model.Pengeluaran'
+        type: array
+      penjualan:
+        items:
+          $ref: '#/definitions/model.Penjualan'
+        type: array
+    type: object
 info:
   contact: {}
   title: LAPAK-UMK OPEN API PROTOTYPE
   version: "2.0"
 paths:
+  /lapumk/getlaporan:
+    get:
+      consumes:
+      - application/json
+      description: Get Data Jumlah.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Recap'
+      summary: Kalkulasi Jumlah Laporan Keuangan.
+      tags:
+      - Lapak-UMKM
+  /lapumk/getpengeluaran:
+    get:
+      consumes:
+      - application/json
+      description: get data Pengeluaran.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Pengeluaran'
+      summary: Get data Pengeluaran.
+      tags:
+      - Lapak-UMKM
+  /lapumk/getpenjualan:
+    get:
+      consumes:
+      - application/json
+      description: get data Penjualan.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Penjualan'
+      summary: Get data Penjualan.
+      tags:
+      - Lapak-UMKM
   /lapumk/inspengeluaran:
     post:
       consumes:

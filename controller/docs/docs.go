@@ -16,6 +16,75 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/lapumk/getlaporan": {
+            "get": {
+                "description": "Get Data Jumlah.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lapak-UMKM"
+                ],
+                "summary": "Kalkulasi Jumlah Laporan Keuangan.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Recap"
+                        }
+                    }
+                }
+            }
+        },
+        "/lapumk/getpengeluaran": {
+            "get": {
+                "description": "get data Pengeluaran.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lapak-UMKM"
+                ],
+                "summary": "Get data Pengeluaran.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Pengeluaran"
+                        }
+                    }
+                }
+            }
+        },
+        "/lapumk/getpenjualan": {
+            "get": {
+                "description": "get data Penjualan.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lapak-UMKM"
+                ],
+                "summary": "Get data Penjualan.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Penjualan"
+                        }
+                    }
+                }
+            }
+        },
         "/lapumk/inspengeluaran": {
             "post": {
                 "description": "get data Pengeluaran.",
@@ -168,11 +237,11 @@ const docTemplate = `{
         "model.Pengeluaran": {
             "type": "object",
             "properties": {
-                "ID": {
-                    "type": "integer"
-                },
                 "cabang": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "jumlah": {
                     "type": "integer"
@@ -204,6 +273,29 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "model.Recap": {
+            "type": "object",
+            "properties": {
+                "jumlahbersih": {
+                    "type": "integer"
+                },
+                "jumlahkotor": {
+                    "type": "integer"
+                },
+                "pengeluaran": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Pengeluaran"
+                    }
+                },
+                "penjualan": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Penjualan"
+                    }
+                }
+            }
         }
     }
 }`
@@ -218,8 +310,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {

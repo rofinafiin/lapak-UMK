@@ -14,12 +14,10 @@ type Penjualan struct {
 	Cabang           string `json:"cabang" bson:"cabang"`
 }
 type Recap struct {
-	ID             int    `json:"id" bson:"id"`
-	NamaPenjualan  string `json:"namapenjualan" bson:"namapenjualan"`
-	RekapPenjualan string `json:"rekappenjualan" bson:"rekappenjualan"`
-	JumlahKotor    int    `json:"jumlahkotor" bson:"jumlahkotor"`
-	Pengeluaran    int    `json:"pengeluaran" bson:"pengeluaran"`
-	JumlahBersih   int    `json:"jumlahbersih" bson:"jumlahbersih"`
+	Penjualan    []Penjualan   `json:"penjualan" bson:"penjualan"`
+	Pengeluaran  []Pengeluaran `json:"pengeluaran" bson:"pengeluaran"`
+	JumlahKotor  int           `json:"jumlahkotor" bson:"jumlahkotor"`
+	JumlahBersih int           `json:"jumlahbersih" bson:"jumlahbersih"`
 }
 type User struct {
 	ID       int    `json:"id" bson:"id"`

@@ -53,9 +53,9 @@ func GetPengeluaranByNama(nama string, db *mongo.Database) (data model.Pengeluar
 	return data, err
 }
 
-func GetAllPengeluaran(cabang string, db *mongo.Database) (data model.Pengeluaran, err error) {
+func GetAllPengeluaran(cabang string, db *mongo.Database) (data []model.Pengeluaran, err error) {
 	user := db.Collection("pengeluaran")
-	filter := bson.M{"cabang": cabang}
+	filter := bson.D{{}}
 	cursor, err := user.Find(context.TODO(), filter)
 	if err != nil {
 		fmt.Printf("GetAllPengeluaran: %v\n", err)
@@ -65,4 +65,27 @@ func GetAllPengeluaran(cabang string, db *mongo.Database) (data model.Pengeluara
 		fmt.Println(err)
 	}
 	return
+}
+
+func GetAllPenjualan(cabang string, db *mongo.Database) (data []model.Penjualan, err error) {
+	user := db.Collection("penjualan")
+	filter := bson.D{{}}
+	cursor, err := user.Find(context.TODO(), filter)
+	if err != nil {
+		fmt.Printf("GetAllPenjualan: %v\n", err)
+	}
+	err = cursor.All(context.TODO(), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+
+func InsertRekap(db *mongo.Database, Pengeluaran []model.Pengeluaran, penjualan []model.Penjualan, jumlahbersih, jumlahkotor int) (InsertedID interface{}, err error) {
+	var m model.Recap
+	m.Pengeluaran = Pengeluaran
+	m.Penjualan = penjualan
+	m.JumlahBersih = jumlahbersih
+	m.JumlahKotor = jumlahkotor
+	return InsertOneDoc(db, "rekap", m), err
 }

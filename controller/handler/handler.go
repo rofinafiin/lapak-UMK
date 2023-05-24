@@ -125,11 +125,89 @@ func (db *UMKHandler) InsPengeluaran(c *fiber.Ctx) (err error) {
 	}.WriteToBody(c)
 }
 
+// KalkulasiLaporan godoc
+// @Summary Kalkulasi Jumlah Laporan Keuangan.
+// @Description Get Data Jumlah.
+// @Tags Lapak-UMKM
+// @Accept application/json
+// @Produce json
+// @Success 200 {object} model.Recap
+// @Router /lapumk/getlaporan [get]
 func (db *UMKHandler) KalkulasiLaporan(c *fiber.Ctx) (err error) {
-	return err
+	cabang := "pekanbaru"
+	getdatapengeluaran, err := repository.GetAllPengeluaran(cabang, config.DBMongo("lapak-UMK"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusNotFound, "Tidak Ada Data Pengeluaran")
+	}
+	getdatapenjualan, err := repository.GetAllPenjualan(cabang, config.DBMongo("lapak-UMK"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusNotFound, "Tidak Ada Data Penjualan")
+	}
+	jmlpenjualan := 0
+	for i, _ := range getdatapenjualan {
+		jmlpenjualan += getdatapenjualan[i].JumlahPenjualan
+	}
+	jmlpengeluaran := 0
+	for z, _ := range getdatapengeluaran {
+		jmlpengeluaran += getdatapengeluaran[z].Jumlah
+	}
+	jumlahakhir := jmlpenjualan - jmlpengeluaran
+
+	Inserted, err := repository.InsertRekap(config.DBMongo("lapak-UMK"),
+		getdatapengeluaran,
+		getdatapenjualan,
+		jmlpenjualan,
+		jumlahakhir,
+	)
+
+	return json.ReturnData{
+		Code:    200,
+		Success: true,
+		Status:  "Data Rekap Berhasil Disimpan",
+		Data:    Inserted,
+	}.WriteToBody(c)
 }
 
+// GetAllPengeluaran godoc
+// @Summary Get data Pengeluaran.
+// @Description get data Pengeluaran.
+// @Tags Lapak-UMKM
+// @Accept application/json
+// @Produce json
+// @Success 200 {object} model.Pengeluaran
+// @Router /lapumk/getpengeluaran [get]
 func (db *UMKHandler) GetAllPengeluaran(c *fiber.Ctx) (err error) {
+	cabang := "pekanbaru"
+	getdata, err := repository.GetAllPengeluaran(cabang, config.DBMongo("lapak-UMK"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusNotFound, "Data tidak ada")
+	}
+	return json.ReturnData{
+		Code:    200,
+		Success: true,
+		Status:  "Data Berhasil diambil",
+		Data:    getdata,
+	}.WriteToBody(c)
+}
 
-	return err
+// GetAllPenjualan godoc
+// @Summary Get data Penjualan.
+// @Description get data Penjualan.
+// @Tags Lapak-UMKM
+// @Accept application/json
+// @Produce json
+// @Success 200 {object} model.Penjualan
+// @Router /lapumk/getpenjualan [get]
+func (db *UMKHandler) GetAllPenjualan(c *fiber.Ctx) (err error) {
+	cabang := "pekanbaru"
+	getdata, err := repository.GetAllPenjualan(cabang, config.DBMongo("lapak-UMK"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusNotFound, "Data tidak ada")
+	}
+	return json.ReturnData{
+		Code:    200,
+		Success: true,
+		Status:  "Data Berhasil diambil",
+		Data:    getdata,
+	}.WriteToBody(c)
 }
